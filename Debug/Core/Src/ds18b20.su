@@ -1,0 +1,13 @@
+ds18b20.c:28:9:DS18B20_Start	16	static
+ds18b20.c:46:6:DS18B20_StartAll	8	static
+ds18b20.c:56:9:DS18B20_Read	40	static
+ds18b20.c:120:9:DS18B20_GetResolution	24	static
+ds18b20.c:147:9:DS18B20_SetResolution	24	static
+ds18b20.c:203:9:DS18B20_Is	16	static
+ds18b20.c:210:9:DS18B20_AllDone	8	static
+ds18b20.c:215:6:DS18B20_ReadAll	24	static
+ds18b20.c:233:6:DS18B20_GetROM	24	static
+ds18b20.c:244:6:DS18B20_WriteROM	24	static
+ds18b20.c:255:9:DS18B20_Quantity	4	static
+ds18b20.c:260:9:DS18B20_GetTemperature	16	static
+ds18b20.c:270:6:DS18B20_Init	24	static
