@@ -52,7 +52,7 @@
 
 /* USER CODE BEGIN PV */
 float temperature;
-char message[8];
+char message[16];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -104,7 +104,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim1);
   DS18B20_Init(DS18B20_Resolution_12bits);
-  HAL_GPIO_WritePin(DS18B20_GPIO_Port, DS18B20_Pin, 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -114,17 +113,20 @@ int main(void)
   {
 
 	  DS18B20_ReadAll();
-	  DS18B20_StartAll();
-	  uint8_t *ROM_tmp;
-	  uint8_t i = 0;
-	    if(DS18B20_GetTemperature(i, &temperature))
-	    {
-	      DS18B20_GetROM(i, ROM_tmp);
-	      memset(message, 0, sizeof(message));
-	      sprintf(message, " Temp: %f\n\r", temperature);
-	      HAL_UART_Transmit(&huart2, (uint8_t*)message, sizeof(message), 100);
-	    }
-
+	   DS18B20_StartAll();
+	   uint8_t ROM_tmp[8];
+	   uint8_t i;
+	   for(i = 0; i < DS18B20_Quantity(); i++)
+	   {
+	     if(DS18B20_GetTemperature(i, &temperature))
+	     {
+	       DS18B20_GetROM(i, ROM_tmp);
+	       memset(message, 0, sizeof(message));
+	       sprintf(message, "Temp : %f", temperature);
+	       HAL_UART_Transmit(&huart2, (uint8_t*)message, sizeof(message), 100);
+	     }
+	   }
+	   HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
